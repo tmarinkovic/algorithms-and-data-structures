@@ -1,11 +1,11 @@
 package model;
 
-public class TimeComplexity {
+public class TimeMeasurement {
 
     private Long startTime;
     private Long endTime;
 
-    protected TimeComplexity() {
+    protected TimeMeasurement() {
         startTime = System.currentTimeMillis();
         System.out.print("STARTED...");
 

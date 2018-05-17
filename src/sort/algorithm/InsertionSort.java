@@ -2,9 +2,9 @@ package sort.algorithm;
 
 
 import model.Algorithm;
-import model.TimeComplexity;
+import model.TimeMeasurement;
 
-public class InsertionSort extends TimeComplexity implements Algorithm {
+public class InsertionSort extends TimeMeasurement implements Algorithm {
 
     private int[] data;
 
