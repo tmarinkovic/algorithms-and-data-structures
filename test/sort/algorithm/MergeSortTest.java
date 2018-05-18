@@ -1,18 +1,17 @@
 package sort.algorithm;
 
-
 import model.Input;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
-class InsertionSortTest {
+class MergeSortTest {
 
     @Test
     void shouldSort() {
-        int[] data = new int[]{6, 65, 7, 9, 88, 4, 50, 24, 6};
-        int[] actual = new InsertionSort(true).run(new Input(data));
-        int[] expected = new int[]{4, 6, 6, 7, 9, 24, 50, 65, 88};
+        int[] data = new int[]{1,2,5,7,12,6,7,8,9};
+        int[] actual = new MergeSort(true).run(new Input(data, 4));
+        int[] expected = new int[]{1,2,5,6,7,7,8,9,12};
 
         assertArrayEquals(actual, expected);
     }

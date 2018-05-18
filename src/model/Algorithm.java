@@ -1,7 +1,7 @@
 package model;
 
 public interface Algorithm {
-    int[] run(int[] data);
+    int[] run(Input input);
 
     void start(int n);
 

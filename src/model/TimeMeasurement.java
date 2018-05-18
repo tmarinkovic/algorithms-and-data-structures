@@ -7,16 +7,26 @@ public class TimeMeasurement {
     private Long startTime;
     private Long endTime;
     private Double executionTime;
+    private boolean showExecutionTime;
 
-    public void start(int n) {
-        startTime = System.currentTimeMillis();
-        System.out.printf("%-40s", "STARTED(n=" + n + ")...");
+    public TimeMeasurement(boolean showExecutionTime) {
+        this.showExecutionTime = showExecutionTime;
     }
 
+    public void start(int n) {
+        if(showExecutionTime) {
+            startTime = System.currentTimeMillis();
+            System.out.printf("%-40s", "STARTED(n=" + n + ")...");
+        }
+    }
+
+
     public void done() {
-        endTime = System.currentTimeMillis();
-        System.out.println(Data.ANSI_GREEN + "DONE!" + Data.ANSI_RESET);
-        printReport();
+        if(showExecutionTime) {
+            endTime = System.currentTimeMillis();
+            System.out.println(Data.ANSI_GREEN + "DONE!" + Data.ANSI_RESET);
+            printReport();
+        }
     }
 
     public Double getExecutionTime() {
@@ -24,8 +34,10 @@ public class TimeMeasurement {
     }
 
     private void printReport() {
-        executionTime = ((endTime - startTime) / (double) 1000);
-        System.out.printf("%-40s", "Execution time:");
-        System.out.println(executionTime + " sec");
+        if(showExecutionTime) {
+            executionTime = ((endTime - startTime) / (double) 1000);
+            System.out.printf("%-40s", "Execution time:");
+            System.out.println(executionTime + " sec");
+        }
     }
 }

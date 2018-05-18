@@ -1,6 +1,8 @@
 package model;
 
 import sort.Data;
+import sort.algorithm.InsertionSort;
+import sort.algorithm.MergeSort;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,11 +16,32 @@ public class TimeComplexity {
 
     public void measure(Algorithm algorithm) {
         HashMap<Integer, Double> result = new HashMap<>();
-        while (n <= 800000) {
-            algorithm.run(Data.getUnsortedArray(n));
-            result.put(n, algorithm.getExecutionTime());
-            n *= 2;
+
+        if (algorithm instanceof MergeSort) {
+            while (n <= 800000) {
+                int[] left = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
+                int[] right = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
+                int[] all = new int[n];
+                for (int i = 0; i < n; i++) {
+                    if (i < n / 2) {
+                        all[i] = left[i];
+                    } else {
+                        all[i] = right[i - n / 2];
+                    }
+                }
+                algorithm.run(new Input(all, (n / 2) - 1));
+                result.put(n, algorithm.getExecutionTime());
+                n *= 2;
+            }
+
+        } else {
+            while (n <= 800000) {
+                algorithm.run(new Input(Data.getUnsortedArray(n)));
+                result.put(n, algorithm.getExecutionTime());
+                n *= 2;
+            }
         }
+
         printResults(result);
     }
 
@@ -30,7 +53,7 @@ public class TimeComplexity {
             System.out.printf("%-15s", keys.get(i));
             System.out.printf("%-15s", result.get(keys.get(i)));
             for (int j = i + 1; j < result.keySet().size(); j++) {
-                complexityIteration ++;
+                complexityIteration++;
                 int r1 = keys.get(j) / keys.get(i);
                 Double r2 = result.get(keys.get(j)) / result.get(keys.get(i));
                 System.out.printf(Data.ANSI_CYAN + "%-15s", "O(n^" + root(r2, r1) + ") " + Data.ANSI_RESET);

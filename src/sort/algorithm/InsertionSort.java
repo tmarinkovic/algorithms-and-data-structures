@@ -2,12 +2,18 @@ package sort.algorithm;
 
 
 import model.Algorithm;
+import model.Input;
 import model.TimeMeasurement;
 
 public class InsertionSort extends TimeMeasurement implements Algorithm {
 
+    public InsertionSort(boolean showExecutionTime) {
+        super(showExecutionTime);
+    }
+
     @Override
-    public int[] run(int[] data) {
+    public int[] run(Input input) {
+        int[] data = input.getData();
         start(data.length);
         for (int i = 1; i < data.length; i++) {
             int current = data[i];
