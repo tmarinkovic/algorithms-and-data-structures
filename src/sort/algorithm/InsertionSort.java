@@ -6,14 +6,9 @@ import model.TimeMeasurement;
 
 public class InsertionSort extends TimeMeasurement implements Algorithm {
 
-    private int[] data;
-
-    public InsertionSort(int[] data) {
-        this.data = data;
-    }
-
     @Override
-    public int[] run() {
+    public int[] run(int[] data) {
+        start(data.length);
         for (int i = 1; i < data.length; i++) {
             int current = data[i];
             int j = i - 1;
@@ -25,10 +20,5 @@ public class InsertionSort extends TimeMeasurement implements Algorithm {
         }
         done();
         return data;
-    }
-
-    @Override
-    public void done() {
-        super.done();
     }
 }

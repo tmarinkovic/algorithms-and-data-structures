@@ -1,24 +1,31 @@
 package model;
 
+import sort.Data;
+
 public class TimeMeasurement {
 
     private Long startTime;
     private Long endTime;
+    private Double executionTime;
 
-    protected TimeMeasurement() {
+    public void start(int n) {
         startTime = System.currentTimeMillis();
-        System.out.print("STARTED...");
-
+        System.out.printf("%-40s", "STARTED(n=" + n + ")...");
     }
 
-    protected void done() {
+    public void done() {
         endTime = System.currentTimeMillis();
-        System.out.println("   DONE!");
+        System.out.println(Data.ANSI_GREEN + "DONE!" + Data.ANSI_RESET);
         printReport();
     }
 
+    public Double getExecutionTime() {
+        return executionTime;
+    }
+
     private void printReport() {
-        Double executionTime = ((endTime - startTime) / (double)1000);
-        System.out.println("Execution time: " + executionTime + " sec");
+        executionTime = ((endTime - startTime) / (double) 1000);
+        System.out.printf("%-40s", "Execution time:");
+        System.out.println(executionTime + " sec");
     }
 }

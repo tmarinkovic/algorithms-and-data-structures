@@ -1,14 +1,18 @@
 package sort;
 
-class Data {
+public class Data {
 
-    static int[] getUnsortedArray(int size){
-        System.out.print("GENERATING DATA...");
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+
+    public static int[] getUnsortedArray(int size) {
+        System.out.printf("%-40s", "GENERATING DATA...");
         int[] array = new int[size];
-        for (int i=0; i<size; i++){
-            array[i] = (int) (Math.random()*size + 1);
+        for (int i = 0; i < size; i++) {
+            array[i] = (int) (Math.random() * size + 1);
         }
-        System.out.println("   DONE!");
+        System.out.println(ANSI_GREEN + "DONE!" + ANSI_RESET);
         return array;
     }
 
