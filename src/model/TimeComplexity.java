@@ -5,20 +5,21 @@ import sort.algorithm.InsertionSort;
 import sort.algorithm.MergeSort;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class TimeComplexity {
 
-    private int n = 50000;
     private Double complexitySum = 0.0;
     private int complexityIteration = 0;
 
     public void measure(Algorithm algorithm) {
-        HashMap<Integer, Double> result = new HashMap<>();
+        System.out.println("TIME COMPLEXITY ANALYSIS FOR: " + algorithm.getClass().getSimpleName());
+        LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 
         if (algorithm instanceof MergeSort) {
-            while (n <= 800000) {
+            int n =  200000;
+            while (n <= 3200000) {
                 int[] left = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
                 int[] right = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
                 int[] all = new int[n];
@@ -35,6 +36,7 @@ public class TimeComplexity {
             }
 
         } else {
+            int n =  50000;
             while (n <= 800000) {
                 algorithm.run(new Input(Data.getUnsortedArray(n)));
                 result.put(n, algorithm.getExecutionTime());
@@ -45,7 +47,7 @@ public class TimeComplexity {
         printResults(result);
     }
 
-    private void printResults(HashMap<Integer, Double> result) {
+    private void printResults(LinkedHashMap<Integer, Double> result) {
         printHeader();
 
         List<Integer> keys = new ArrayList<>(result.keySet());
@@ -64,12 +66,14 @@ public class TimeComplexity {
         printResults(result, keys, avgComplexity);
     }
 
-    private void printResults(HashMap<Integer, Double> result, List<Integer> keys, Double avgComplexity) {
+    private void printResults(LinkedHashMap<Integer, Double> result, List<Integer> keys, Double avgComplexity) {
         System.out.printf("%-15s", keys.get(keys.size() - 1));
         System.out.printf("%-15s", result.get(keys.get(keys.size() - 1)));
         System.out.println();
         System.out.print(Data.ANSI_GREEN + "AVERAGE COMPLEXITY: " + Data.ANSI_RESET);
         System.out.println(Data.ANSI_CYAN + "O(n^" + avgComplexity + ")" + Data.ANSI_RESET);
+        System.out.println();
+        System.out.println();
     }
 
     private void printHeader() {

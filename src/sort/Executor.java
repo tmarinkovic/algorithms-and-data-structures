@@ -7,7 +7,7 @@ import sort.algorithm.MergeSort;
 public class Executor {
 
     public static void main(String[] args) {
-        //new TimeComplexity().measure(new InsertionSort());
+        new TimeComplexity().measure(new InsertionSort(true));
         new TimeComplexity().measure(new MergeSort(true));
     }
 }

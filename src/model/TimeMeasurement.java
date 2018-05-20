@@ -2,7 +2,7 @@ package model;
 
 import sort.Data;
 
-public class TimeMeasurement {
+public abstract class TimeMeasurement {
 
     private Long startTime;
     private Long endTime;
@@ -15,7 +15,7 @@ public class TimeMeasurement {
 
     public void start(int n) {
         if(showExecutionTime) {
-            startTime = System.currentTimeMillis();
+            startTime = System.nanoTime();
             System.out.printf("%-40s", "STARTED(n=" + n + ")...");
         }
     }
@@ -23,7 +23,7 @@ public class TimeMeasurement {
 
     public void done() {
         if(showExecutionTime) {
-            endTime = System.currentTimeMillis();
+            endTime = System.nanoTime();
             System.out.println(Data.ANSI_GREEN + "DONE!" + Data.ANSI_RESET);
             printReport();
         }
@@ -35,7 +35,7 @@ public class TimeMeasurement {
 
     private void printReport() {
         if(showExecutionTime) {
-            executionTime = ((endTime - startTime) / (double) 1000);
+            executionTime = (endTime - startTime)/ 1000000000.0;
             System.out.printf("%-40s", "Execution time:");
             System.out.println(executionTime + " sec");
         }
