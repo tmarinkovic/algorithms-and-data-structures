@@ -2,7 +2,7 @@ package sort.algorithm;
 
 
 import model.Algorithm;
-import model.Input;
+import model.Input.Input;
 import model.TimeMeasurement;
 
 public class InsertionSort extends TimeMeasurement implements Algorithm {

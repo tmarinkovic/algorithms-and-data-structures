@@ -2,12 +2,12 @@ package sort;
 
 import model.TimeComplexity;
 import sort.algorithm.InsertionSort;
-import sort.algorithm.MergeSort;
+import sort.algorithm.Merge;
 
 public class Executor {
 
     public static void main(String[] args) {
         new TimeComplexity().measure(new InsertionSort(true));
-        new TimeComplexity().measure(new MergeSort(true));
+        new TimeComplexity().measure(new Merge(true));
     }
 }

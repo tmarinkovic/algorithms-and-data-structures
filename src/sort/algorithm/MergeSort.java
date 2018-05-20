@@ -1,47 +1,43 @@
 package sort.algorithm;
 
 import model.Algorithm;
-import model.Input;
-import model.TimeMeasurement;
+import model.Input.Input;
+import model.Input.MergeInput;
+import model.Input.MergeSortInput;
 
-public class MergeSort extends TimeMeasurement implements Algorithm {
+public class MergeSort implements Algorithm {
 
-    public MergeSort(boolean showExecutionTime) {
-        super(showExecutionTime);
-    }
 
     @Override
     public int[] run(Input input) {
-        int[] data = input.getData();
+        int data[] = input.getData();
+        int p = ((MergeSortInput) input).getStart();
+        int r = ((MergeSortInput) input).getEnd();
 
-        start(data.length);
+        int t = p + 1;
 
-        int n1 = input.getMergeSortBreak() + 1;
-        int n2 = data.length - n1;
-
-        int[] Left = new int[n1+1];
-        int[] Right = new int[n2+1];
-
-        System.arraycopy(data, 0, Left, 0, n1);
-        System.arraycopy(data, n1, Right, 0, n2);
-
-        Left[n1] = Integer.MAX_VALUE;
-        Right[n2] = Integer.MAX_VALUE;
-
-        int leftIndex = 0;
-        int rightIndex = 0;
-
-        for(int i = 0; i < data.length; i++){
-            if(Left[leftIndex] <= Right[rightIndex]){
-                data[i] = Left[leftIndex];
-                leftIndex++;
-            }
-            else{
-                data[i] = Right[rightIndex];
-                rightIndex++;
-            }
+        if (t < r) {
+            int q = (int) Math.floor((p + r) / 2.0);
+            data = run(new MergeSortInput(data, p, q));
+            data = run(new MergeSortInput(data, q, r));
+            data = new Merge(false).run(new MergeInput(data, p, q - 1, r - 1));
         }
-        done();
+
         return data;
+    }
+
+    @Override
+    public void start(int n) {
+
+    }
+
+    @Override
+    public void done() {
+
+    }
+
+    @Override
+    public Double getExecutionTime() {
+        return null;
     }
 }

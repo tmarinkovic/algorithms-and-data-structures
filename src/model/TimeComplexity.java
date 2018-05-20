@@ -1,7 +1,11 @@
 package model;
 
+import model.Input.InsertSortInput;
+import model.Input.MergeInput;
+import model.Input.MergeSortInput;
 import sort.Data;
 import sort.algorithm.InsertionSort;
+import sort.algorithm.Merge;
 import sort.algorithm.MergeSort;
 
 import java.util.ArrayList;
@@ -17,11 +21,11 @@ public class TimeComplexity {
         System.out.println("TIME COMPLEXITY ANALYSIS FOR: " + algorithm.getClass().getSimpleName());
         LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 
-        if (algorithm instanceof MergeSort) {
+        if (algorithm instanceof Merge) {
             int n =  200000;
             while (n <= 3200000) {
-                int[] left = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
-                int[] right = new InsertionSort(false).run(new Input(Data.getUnsortedArray(n / 2)));
+                int[] left = new InsertionSort(false).run(new InsertSortInput(Data.getUnsortedArray(n / 2)));
+                int[] right = new InsertionSort(false).run(new InsertSortInput(Data.getUnsortedArray(n / 2)));
                 int[] all = new int[n];
                 for (int i = 0; i < n; i++) {
                     if (i < n / 2) {
@@ -30,15 +34,16 @@ public class TimeComplexity {
                         all[i] = right[i - n / 2];
                     }
                 }
-                algorithm.run(new Input(all, (n / 2) - 1));
+                algorithm.run(new MergeInput(all, 0, (n / 2) - 1, all.length - 1));
                 result.put(n, algorithm.getExecutionTime());
                 n *= 2;
             }
 
-        } else {
+        }
+        else {
             int n =  50000;
             while (n <= 800000) {
-                algorithm.run(new Input(Data.getUnsortedArray(n)));
+                algorithm.run(new InsertSortInput(Data.getUnsortedArray(n)));
                 result.put(n, algorithm.getExecutionTime());
                 n *= 2;
             }
