@@ -1,12 +1,10 @@
 package model;
 
-import model.Input.InsertSortInput;
+import model.Input.DataInput;
 import model.Input.MergeInput;
-import model.Input.MergeSortInput;
 import sort.Data;
 import sort.algorithm.InsertionSort;
 import sort.algorithm.Merge;
-import sort.algorithm.MergeSort;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,14 +16,14 @@ public class TimeComplexity {
     private int complexityIteration = 0;
 
     public void measure(Algorithm algorithm) {
-        System.out.println("TIME COMPLEXITY ANALYSIS FOR: " + algorithm.getClass().getSimpleName());
+        System.out.println(Data.ANSI_YELLOW + "TIME COMPLEXITY ANALYSIS FOR: " + algorithm.getClass().getSimpleName() + Data.ANSI_RESET);
         LinkedHashMap<Integer, Double> result = new LinkedHashMap<>();
 
         if (algorithm instanceof Merge) {
-            int n =  200000;
-            while (n <= 3200000) {
-                int[] left = new InsertionSort(false).run(new InsertSortInput(Data.getUnsortedArray(n / 2)));
-                int[] right = new InsertionSort(false).run(new InsertSortInput(Data.getUnsortedArray(n / 2)));
+            int n = 50000;
+            while (n <= 800000) {
+                int[] left = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
+                int[] right = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
                 int[] all = new int[n];
                 for (int i = 0; i < n; i++) {
                     if (i < n / 2) {
@@ -39,11 +37,10 @@ public class TimeComplexity {
                 n *= 2;
             }
 
-        }
-        else {
-            int n =  50000;
-            while (n <= 800000) {
-                algorithm.run(new InsertSortInput(Data.getUnsortedArray(n)));
+        } else {
+            int n = 25000;
+            while (n <= 400000) {
+                algorithm.run(new DataInput(Data.getUnsortedArray(n)));
                 result.put(n, algorithm.getExecutionTime());
                 n *= 2;
             }

@@ -1,11 +1,11 @@
 package model.Input;
 
 
-public class InsertSortInput implements Input {
+public class DataInput implements Input {
 
     private int[] data;
 
-    public InsertSortInput(int[] data) {
+    public DataInput(int[] data) {
         this.data = data;
     }
 
