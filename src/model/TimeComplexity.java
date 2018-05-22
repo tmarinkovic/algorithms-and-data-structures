@@ -2,9 +2,11 @@ package model;
 
 import model.Input.DataInput;
 import model.Input.MergeInput;
+import model.Input.MergeSortInput;
 import sort.Data;
 import sort.algorithm.InsertionSort;
 import sort.algorithm.Merge;
+import sort.algorithm.MergeSort;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -22,17 +24,17 @@ public class TimeComplexity {
         if (algorithm instanceof Merge) {
             int n = 50000;
             while (n <= 800000) {
-                int[] left = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
-                int[] right = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
-                int[] all = new int[n];
-                for (int i = 0; i < n; i++) {
-                    if (i < n / 2) {
-                        all[i] = left[i];
-                    } else {
-                        all[i] = right[i - n / 2];
-                    }
-                }
-                algorithm.run(new MergeInput(all, 0, (n / 2) - 1, all.length - 1));
+                int[] data = getMergeData(n);
+                algorithm.run(new MergeInput(data, 0, (n / 2) - 1, data.length - 1));
+                result.put(n, algorithm.getExecutionTime());
+                n *= 2;
+            }
+
+        } else if (algorithm instanceof MergeSort) {
+            int n = 1000000;
+            while (n <= 64000000) {
+                int[] data = Data.getUnsortedArray(n);
+                algorithm.run(new MergeSortInput(data, 0, data.length));
                 result.put(n, algorithm.getExecutionTime());
                 n *= 2;
             }
@@ -47,6 +49,20 @@ public class TimeComplexity {
         }
 
         printResults(result);
+    }
+
+    private int[] getMergeData(int n) {
+        int[] left = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
+        int[] right = new InsertionSort(false).run(new DataInput(Data.getUnsortedArray(n / 2)));
+        int[] all = new int[n];
+        for (int i = 0; i < n; i++) {
+            if (i < n / 2) {
+                all[i] = left[i];
+            } else {
+                all[i] = right[i - n / 2];
+            }
+        }
+        return all;
     }
 
     private void printResults(LinkedHashMap<Integer, Double> result) {
