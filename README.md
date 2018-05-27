@@ -12,7 +12,7 @@ It also measure time needed to run on different input sizes and estimates time c
     * Maximum Subarray
     
 ## Run
-Each type of algorithms has its own package (e.g sort) has Executor class that runs all the algorithms and measure time complexity.
+Each type of algorithms has its own package (e.g sort) and Executor class that runs all the algorithms and measure time complexity.
 ## Tests
 Each algorithm has one basic test to validate algorithm works as expected.
     
