@@ -3,7 +3,7 @@ package model;
 import model.Input.DataInput;
 import model.Input.MergeInput;
 import model.Input.MergeSortInput;
-import sort.Data;
+import data.Data;
 import sort.algorithm.InsertionSort;
 import sort.algorithm.Merge;
 import sort.algorithm.MergeSort;

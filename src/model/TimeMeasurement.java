@@ -1,6 +1,6 @@
 package model;
 
-import sort.Data;
+import data.Data;
 
 public abstract class TimeMeasurement {
 

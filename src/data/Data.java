@@ -1,4 +1,4 @@
-package sort;
+package data;
 
 public class Data {
 
