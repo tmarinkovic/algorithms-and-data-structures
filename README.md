@@ -8,6 +8,9 @@ It also measure time needed to run on different input sizes and estimates time c
     * Merge Sort
     * Bubble Sort
     
+* Array
+    * Maximum Subarray
+    
 ## Run
 Each type of algorithms has its own package (e.g sort) has Executor class that runs all the algorithms and measure time complexity.
 ## Tests
