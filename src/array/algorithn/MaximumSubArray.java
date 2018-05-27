@@ -17,20 +17,20 @@ public class MaximumSubArray extends TimeMeasurement implements Algorithm {
         start(data.length);
 
         int currentMaximum = Integer.MIN_VALUE;
-        int maximum = 0, startIndex = 0, endIndex = 0, s = 0;
+        int sum = 0, startIndex = 0, endIndex = 0, tempStartIndex = 0;
 
         for (int i = 0; i < data.length; i++) {
-            maximum += data[i];
+            sum += data[i];
 
-            if (currentMaximum < maximum) {
-                currentMaximum = maximum;
-                startIndex = s;
+            if (currentMaximum < sum) {
+                currentMaximum = sum;
+                startIndex = tempStartIndex;
                 endIndex = i;
             }
 
-            if (maximum < 0) {
-                maximum = 0;
-                s = i + 1;
+            if (sum < 0) {
+                sum = 0;
+                tempStartIndex = i + 1;
             }
         }
         done();
