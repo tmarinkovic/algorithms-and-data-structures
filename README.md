@@ -1,4 +1,7 @@
 # Algorithms and data structures
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+
 This project contains some of known algorithms and data structures implemented in Java. 
 
 It also measure time needed to run on different input sizes and estimates time complexity.
